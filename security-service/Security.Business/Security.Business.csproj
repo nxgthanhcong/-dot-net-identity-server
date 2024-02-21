@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\core\Core.Models\Core.Models.csproj" />
+    <ProjectReference Include="..\..\core\Core.Utilities\Core.Utilities.csproj" />
+    <ProjectReference Include="..\Security.Models\Security.Models.csproj" />
+    <ProjectReference Include="..\Security.Repositories\Security.Repositories.csproj" />
+  </ItemGroup>
+
+</Project>
