@@ -30,6 +30,12 @@ namespace Core.DatabaseProviders.Implementions.Postgre
             return rs;
         }
 
-
+        public async Task<List<T>> QueryAsync<T>(string sql, object param)
+        {
+            using (IDbConnection dbConnection = new NpgsqlConnection(connectionString))
+            {
+                return (await dbConnection.QueryAsync<T>(sql, param)).ToList();
+            }
+        }
     }
 }

@@ -1,9 +1,10 @@
-﻿using Security.Models.RequestModels;
+﻿using Security.Models.ProcessModels;
 
 namespace Security.Repositories.Interfaces
 {
     public interface ISecurityRepository
     {
-        Task<bool> CreateUser(ManualSignupReq manualSignupReq);
+        Task<bool> CreateUser(UserModel user);
+        Task<bool> IsExistUserInDb(string username);
     }
 }

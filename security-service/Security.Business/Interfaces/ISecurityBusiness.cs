@@ -1,10 +1,10 @@
 ﻿using Core.Models.ResponseModels;
-using Security.Models.RequestModels;
+using Security.Models.ProcessModels;
 
 namespace Security.Business.Interfaces
 {
     public interface ISecurityBusiness
     {
-        Task<ResponseModel> Signup(ManualSignupReq manualSignupReq);
+        Task<ResponseModel> Signup(UserModel user);
     }
 }

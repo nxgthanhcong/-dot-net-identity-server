@@ -1,4 +1,5 @@
-﻿using Core.DatabaseProviders.Implementions.Postgre;
+﻿using AuthenticationServer.Infracture.AutoMapper;
+using Core.DatabaseProviders.Implementions.Postgre;
 using Core.DatabaseProviders.Interfaces;
 using Microsoft.Extensions.Configuration;
 using Security.Business.Implementions;
@@ -13,6 +14,8 @@ namespace AuthenticationServer.Infracture.ServiceRegisteration
     {
         public static IServiceCollection AddInternalServices(this IServiceCollection services, ConfigurationManager configuration)
         {
+            services.AddAutoMapper(typeof(AutoMapperProfile).Assembly);
+
             services.AddScoped<ISecurityRepository, SecurityRepository>();
             services.AddScoped<ISecurityBusiness, SecurityBusiness>();
             services.AddScoped<IDbProvider, PostgreProvider>();
