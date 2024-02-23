@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Core.Utilities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Security.Business.Interfaces;
 using Security.Models.ProcessModels;
@@ -25,6 +26,27 @@ namespace AuthenticationServer.Controllers.v1
             UserModel user = mapper.Map<UserModel>(manualSignupReq);
 
             return Ok(await securityBusiness.Signup(user));
+        }
+
+        [HttpPost("signin")]
+        public async Task<IActionResult> Signin(ManualSignupReq manualSignupReq)
+        {
+            UserModel user = mapper.Map<UserModel>(manualSignupReq);
+
+            return Ok(await securityBusiness.Signin(user));
+        }
+
+        [HttpGet("normal")]
+        public async Task<IActionResult> Normal()
+        {
+            return Ok("abc");
+        }
+
+        [HttpGet("auth")]
+        [Authorize]
+        public async Task<IActionResult> Auth()
+        {
+            return Ok("def");
         }
     }
 }
