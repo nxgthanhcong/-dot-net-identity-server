@@ -13,14 +13,14 @@ namespace Security.Repositories.Implementions
             this.dbProvider = dbProvider;
         }
 
-        public async Task<bool> IsExistUserInDb(string username)
+        public async Task<UserModel> GetUserByUsername(string username)
         {
             string sql = "select * from identity.public.users where username = @username";
-            var rs = await dbProvider.QueryAsync<ManualSignupReq>(sql, new
+            var rs = await dbProvider.QueryAsync<UserModel>(sql, new
             {
                 @username = username
             });
-            return rs.Any();
+            return rs.FirstOrDefault();
         }
 
         public async Task<bool> CreateUser(UserModel user)
@@ -28,5 +28,6 @@ namespace Security.Repositories.Implementions
             string sql = "INSERT INTO users (username, password) VALUES (@Username, @PasswordHash)";
             return await dbProvider.ExcuteAsync(sql, user);
         }
+
     }
 }
