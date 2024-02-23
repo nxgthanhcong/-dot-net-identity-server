@@ -6,5 +6,6 @@ namespace Security.Business.Interfaces
     public interface ISecurityBusiness
     {
         Task<ResponseModel> Signup(UserModel user);
+        Task<ResponseModel> Signin(UserModel user);
     }
 }
