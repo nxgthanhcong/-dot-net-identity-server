@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Security.Business.Interfaces;
 using Security.Models.ProcessModels;
 using Security.Models.RequestModels;
+using Security.Models.ResponseModels;
 
 namespace AuthenticationServer.Controllers.v1
 {
@@ -31,9 +32,17 @@ namespace AuthenticationServer.Controllers.v1
         [HttpPost("signin")]
         public async Task<IActionResult> Signin(ManualSignupReq manualSignupReq)
         {
+            manualSignupReq.Username = "admin@example.com";
+            manualSignupReq.Password = "admin@123";
             UserModel user = mapper.Map<UserModel>(manualSignupReq);
 
             return Ok(await securityBusiness.Signin(user));
+        }
+
+        [HttpPost("refresh-token")]
+        public async Task<IActionResult> RefreshToken(TokenRes tokenRes)
+        {
+            return Ok(await securityBusiness.RefreshToken(tokenRes));
         }
 
         [HttpGet("normal")]

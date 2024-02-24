@@ -17,6 +17,7 @@
     <ProjectReference Include="..\security-service\Security.Business\Security.Business.csproj" />
     <ProjectReference Include="..\security-service\Security.Models\Security.Models.csproj" />
     <ProjectReference Include="..\security-service\Security.Repositories\Security.Repositories.csproj" />
+    <ProjectReference Include="..\security-service\Security.Services\Security.Services.csproj" />
   </ItemGroup>
 
 </Project>

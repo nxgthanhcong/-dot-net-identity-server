@@ -8,6 +8,8 @@ using Security.Business.Implementions;
 using Security.Business.Interfaces;
 using Security.Repositories.Implementions;
 using Security.Repositories.Interfaces;
+using Security.Services.Implementions;
+using Security.Services.Interfaces;
 using System.Runtime.CompilerServices;
 using System.Text;
 
@@ -33,11 +35,13 @@ namespace AuthenticationServer.Infracture.ServiceRegisteration
                     ValidateIssuerSigningKey = true,
                     ValidIssuer = configuration["TokenValidationParameters:ValidIssuer"],
                     ValidAudience = configuration["TokenValidationParameters:ValidAudience"],
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["TokenValidationParameters:Key"]))
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["TokenValidationParameters:Key"])),
+                    ClockSkew = TimeSpan.Zero
                 };
             });
 
             services.AddScoped<ISecurityRepository, SecurityRepository>();
+            services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<ISecurityBusiness, SecurityBusiness>();
             services.AddScoped<IDbProvider, PostgreProvider>();
 
