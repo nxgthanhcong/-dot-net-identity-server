@@ -1,16 +1,13 @@
-﻿using Core.Models.ResponseModels;
+﻿using Core.Logging.Interfaces;
+using Core.Models.LoggingModels;
+using Core.Models.ResponseModels;
 using Core.Utilities;
-using Microsoft.Extensions.Configuration;
-using Microsoft.IdentityModel.Tokens;
 using Security.Business.Interfaces;
 using Security.Models.ProcessModels;
-using Security.Models.RequestModels;
 using Security.Models.ResponseModels;
 using Security.Repositories.Interfaces;
 using Security.Services.Interfaces;
-using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using System.Text;
 
 namespace Security.Business.Implementions
 {
@@ -18,11 +15,13 @@ namespace Security.Business.Implementions
     {
         private readonly ITokenService tokenService;
         private readonly ISecurityRepository securityRepository;
+        private readonly ILoggingService loggingService;
 
-        public SecurityBusiness(ISecurityRepository securityRepository, ITokenService tokenService, IConfiguration configuration)
+        public SecurityBusiness(ISecurityRepository securityRepository, ITokenService tokenService, ILoggingService loggingService)
         {
             this.tokenService = tokenService;
             this.securityRepository = securityRepository;
+            this.loggingService = loggingService;
         }
 
         public async Task<ResponseModel> Signup(UserModel user)
@@ -108,6 +107,16 @@ namespace Security.Business.Implementions
             {
                 return ResponseModel.Error;
             }
+        }
+    
+        public async Task Normal()
+        {
+            loggingService.SendLogMessageAsync(new LoggingModel
+            {
+                LogLevel = LogLevelEnum.Info,
+                Source = "dev",
+                Message = "success",
+            });
         }
     }
 }

@@ -48,6 +48,7 @@ namespace AuthenticationServer.Controllers.v1
         [HttpGet("normal")]
         public async Task<IActionResult> Normal()
         {
+            securityBusiness.Normal();
             return Ok("abc");
         }
 

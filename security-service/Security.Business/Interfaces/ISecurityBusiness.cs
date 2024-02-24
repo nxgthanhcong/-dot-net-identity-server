@@ -9,5 +9,6 @@ namespace Security.Business.Interfaces
         Task<ResponseModel> Signup(UserModel user);
         Task<ResponseModel> Signin(UserModel user);
         Task<ResponseModel> RefreshToken(TokenRes tokenModel);
+        Task Normal();
     }
 }

@@ -1,8 +1,9 @@
 ﻿using AuthenticationServer.Infracture.AutoMapper;
 using Core.DatabaseProviders.Implementions.Postgre;
 using Core.DatabaseProviders.Interfaces;
+using Core.Logging.Implementions;
+using Core.Logging.Interfaces;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Security.Business.Implementions;
 using Security.Business.Interfaces;
@@ -10,7 +11,6 @@ using Security.Repositories.Implementions;
 using Security.Repositories.Interfaces;
 using Security.Services.Implementions;
 using Security.Services.Interfaces;
-using System.Runtime.CompilerServices;
 using System.Text;
 
 namespace AuthenticationServer.Infracture.ServiceRegisteration
@@ -39,6 +39,8 @@ namespace AuthenticationServer.Infracture.ServiceRegisteration
                     ClockSkew = TimeSpan.Zero
                 };
             });
+
+            services.AddScoped<ILoggingService, ElasticLoggingService>();
 
             services.AddScoped<ISecurityRepository, SecurityRepository>();
             services.AddScoped<ITokenService, TokenService>();
