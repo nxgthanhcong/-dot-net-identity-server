@@ -14,7 +14,9 @@
 
   <ItemGroup>
     <ProjectReference Include="..\core\Core.DatabaseProviders\Core.DatabaseProviders.csproj" />
+    <ProjectReference Include="..\core\Core.HttpServices\Core.HttpServices.csproj" />
     <ProjectReference Include="..\core\Core.Logging\Core.Logging.csproj" />
+    <ProjectReference Include="..\core\Core.NotifyService\Core.NotifyService.csproj" />
     <ProjectReference Include="..\security-service\Security.Business\Security.Business.csproj" />
     <ProjectReference Include="..\security-service\Security.Models\Security.Models.csproj" />
     <ProjectReference Include="..\security-service\Security.Repositories\Security.Repositories.csproj" />

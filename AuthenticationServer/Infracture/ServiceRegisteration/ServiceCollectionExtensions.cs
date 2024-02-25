@@ -1,8 +1,12 @@
 ﻿using AuthenticationServer.Infracture.AutoMapper;
 using Core.DatabaseProviders.Implementions.Postgre;
 using Core.DatabaseProviders.Interfaces;
+using Core.HttpServices.Implementions;
+using Core.HttpServices.Interfaces;
 using Core.Logging.Implementions;
 using Core.Logging.Interfaces;
+using Core.NotifyService.Implementions;
+using Core.NotifyService.Interfaces;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Security.Business.Implementions;
@@ -41,6 +45,8 @@ namespace AuthenticationServer.Infracture.ServiceRegisteration
             });
 
             services.AddScoped<ILoggingService, ElasticLoggingService>();
+            services.AddScoped<INotifyService, TelegramNotifyService>();
+            services.AddScoped<IHttpService, HttpService>();
 
             services.AddScoped<ISecurityRepository, SecurityRepository>();
             services.AddScoped<ITokenService, TokenService>();
