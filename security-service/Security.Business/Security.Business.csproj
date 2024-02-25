@@ -13,6 +13,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\core\Core.Logging\Core.Logging.csproj" />
     <ProjectReference Include="..\..\core\Core.Models\Core.Models.csproj" />
+    <ProjectReference Include="..\..\core\Core.NotifyService\Core.NotifyService.csproj" />
     <ProjectReference Include="..\..\core\Core.Utilities\Core.Utilities.csproj" />
     <ProjectReference Include="..\Security.Models\Security.Models.csproj" />
     <ProjectReference Include="..\Security.Repositories\Security.Repositories.csproj" />

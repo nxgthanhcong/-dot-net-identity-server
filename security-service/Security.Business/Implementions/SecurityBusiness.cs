@@ -1,6 +1,7 @@
 ﻿using Core.Logging.Interfaces;
 using Core.Models.LoggingModels;
 using Core.Models.ResponseModels;
+using Core.NotifyService.Interfaces;
 using Core.Utilities;
 using Security.Business.Interfaces;
 using Security.Models.ProcessModels;
@@ -16,12 +17,14 @@ namespace Security.Business.Implementions
         private readonly ITokenService tokenService;
         private readonly ISecurityRepository securityRepository;
         private readonly ILoggingService loggingService;
+        private readonly INotifyService notifyService;
 
-        public SecurityBusiness(ISecurityRepository securityRepository, ITokenService tokenService, ILoggingService loggingService)
+        public SecurityBusiness(ISecurityRepository securityRepository, ITokenService tokenService, ILoggingService loggingService, INotifyService notifyService)
         {
             this.tokenService = tokenService;
             this.securityRepository = securityRepository;
             this.loggingService = loggingService;
+            this.notifyService = notifyService;
         }
 
         public async Task<ResponseModel> Signup(UserModel user)
@@ -41,6 +44,18 @@ namespace Security.Business.Implementions
             }
             catch (Exception ex)
             {
+                LoggingModel loggingModel = new LoggingModel
+                {
+                    LogLevel = LogLevelEnum.Error,
+                    Message = ex.ToString(),
+                    Source = ex.Source,
+                    Context = new
+                    {
+                        user
+                    },
+                };
+                loggingService.SendLogMessageAsync(loggingModel);
+                notifyService.SendNotiMessageAsync(loggingModel);
                 return ResponseModel.Error;
             }
         }
@@ -70,6 +85,18 @@ namespace Security.Business.Implementions
             }
             catch (Exception ex)
             {
+                LoggingModel loggingModel = new LoggingModel
+                {
+                    LogLevel = LogLevelEnum.Error,
+                    Message = ex.ToString(),
+                    Source = ex.Source,
+                    Context = new
+                    {
+                        user
+                    },
+                };
+                loggingService.SendLogMessageAsync(loggingModel);
+                notifyService.SendNotiMessageAsync(loggingModel);
                 return ResponseModel.Error;
             }
         }
@@ -105,18 +132,40 @@ namespace Security.Business.Implementions
             }
             catch (Exception ex)
             {
+                LoggingModel loggingModel = new LoggingModel
+                {
+                    LogLevel = LogLevelEnum.Error,
+                    Message = ex.ToString(),
+                    Source = ex.Source,
+                    Context = new
+                    {
+                        tokenModel
+                    },
+                };
+                loggingService.SendLogMessageAsync(loggingModel);
+                notifyService.SendNotiMessageAsync(loggingModel);
                 return ResponseModel.Error;
             }
         }
     
-        public async Task Normal()
+        public async Task<ResponseModel> Normal()
         {
-            loggingService.SendLogMessageAsync(new LoggingModel
+            try
             {
-                LogLevel = LogLevelEnum.Info,
-                Source = "dev",
-                Message = "success",
-            });
+                throw new NotImplementedException();
+            }
+            catch(Exception ex)
+            {
+                LoggingModel loggingModel = new LoggingModel
+                {
+                    LogLevel = LogLevelEnum.Error,
+                    Message = ex.ToString(),
+                    Source = ex.Source,
+                };
+                loggingService.SendLogMessageAsync(loggingModel);
+                notifyService.SendNotiMessageAsync(loggingModel);
+                return ResponseModel.Error;
+            }
         }
     }
 }
